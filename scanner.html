@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Scanner</title>
+    <link rel="stylesheet" href="css/styling.css">
+</head>
+<body>
+<div class="container">
+    <h1>Scan QR Code</h1>
+
+    <!-- Display logged-in checkpoint -->
+    <p id="loggedInAs"></p>
+
+    <div id="reader" style="width:100%; max-width:400px;"></div>
+    <p id="scanStatus">No QR code scanned yet.</p>
+    <button id="scanButton">Scan QR Code</button>
+    <button id="sendButton" disabled>Send QR Code</button>
+</div>
+
+<!-- HTML5 QR Code library -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        const checkpointID = localStorage.getItem("usedCheckpoint");
+        if (!checkpointID) {
+            window.location.href = "index.html";
+            return;
+        }
+
+        // Show logged-in checkpoint
+        const loggedInDisplay = document.getElementById("loggedInAs");
+        loggedInDisplay.textContent = `Logged in`;
+
+        const scanStatus = document.getElementById("scanStatus");
+        const scanButton = document.getElementById("scanButton");
+        const sendButton = document.getElementById("sendButton");
+        let scannedQRCode = null;
+        let sent = false;
+        const html5QrCode = new Html5Qrcode("reader");
+
+        scanButton.addEventListener("click", async () => {
+            scanStatus.style.color = "black";
+            scanStatus.textContent = "Scanning...";
+            scannedQRCode = null;
+
+            try {
+                const devices = await Html5Qrcode.getCameras();
+                if (!devices || !devices.length) {
+                    scanStatus.style.color = "red";
+                    scanStatus.textContent = "No camera found!";
+                    return;
+                }
+
+                const cameraId = devices[0].id;
+
+                html5QrCode.start(
+                    { deviceId: { exact: cameraId } },
+                    { fps: 10, qrbox: 250 },
+                    (decodedText) => {
+                        scannedQRCode = decodedText;
+                        scanStatus.style.color = "green";
+                        scanStatus.textContent = `QR Code detected: ${decodedText}`;
+                        sendButton.disabled = false;
+
+                        html5QrCode.stop().catch(err => console.error("Failed to stop scanner:", err));
+                    },
+                    (errorMessage) => {
+                        console.log("Scan error (ignored):", errorMessage);
+                    }
+                );
+            } catch (err) {
+                console.error("Scanner initialization error:", err);
+                scanStatus.style.color = "red";
+                scanStatus.textContent = "Failed to start scanner!";
+            }
+        });
+
+        sendButton.addEventListener("click", () => {
+            if (!scannedQRCode || sent) return;
+
+            const apiUrl = `https://api.myled.tk/${encodeURIComponent(checkpointID)}/${encodeURIComponent(scannedQRCode)}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Server response:", data);
+                    scanStatus.textContent = `Scan submitted: ${scannedQRCode}`;
+                    sent = true;
+                    sendButton.disabled = true;
+                })
+                .catch(err => {
+                    console.error("Error sending scan:", err);
+                    scanStatus.style.color = "red";
+                    scanStatus.textContent = "Error sending scan!";
+                });
+        });
+    });
+</script>
+</body>
+</html>
