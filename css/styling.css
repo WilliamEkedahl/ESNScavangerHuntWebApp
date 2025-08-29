@@ -62,7 +62,7 @@ button:hover {
 }
 
 .logo-container img {
-    width: 300px;        /* adjust size */
+    width: 100px;        /* adjust size */
     height: auto;
     opacity: 0.8;
 }
