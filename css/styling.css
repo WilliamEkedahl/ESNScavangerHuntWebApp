@@ -54,7 +54,7 @@ button:hover {
 }
 
 .logo-container {
-    position: ;
+    position: fixed;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
@@ -62,7 +62,7 @@ button:hover {
 }
 
 .logo-container img {
-    width: 100px;        /* adjust size */
+    width: 300px;        /* adjust size */
     height: auto;
     opacity: 0.8;
 }
