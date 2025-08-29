@@ -53,17 +53,16 @@ button:hover {
     background: red;
 }
 
-.container {
-    text-align: center;
-    padding-bottom: 50px; /* space above logo */
-}
-
 .logo-container {
+    position: ;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
-    margin-top: 20px;     /* space between scanner and logo */
 }
 
 .logo-container img {
-    width: 3000px;   /* adjust size */
+    width: 300px;        /* adjust size */
     height: auto;
+    opacity: 0.8;
 }
