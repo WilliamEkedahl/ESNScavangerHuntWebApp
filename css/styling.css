@@ -52,3 +52,17 @@ button:hover {
 #scanButton {
     background: red;
 }
+
+.logo-container {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.logo-container img {
+    width: 60px;        /* adjust size */
+    height: auto;
+    opacity: 0.8;
+}
