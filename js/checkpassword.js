@@ -11,7 +11,15 @@ const checkpoints = {
     station9: "mango-pear-KT",
     station10: "apple-grape-HS",
     station11: "coral-bike-LS",
-    station12: "mine-river-TP"
+    station12: "mine-river-TP",
+    TestStation1: "test1",
+    TestStation2: "test2",
+    TestStation3: "test3",
+    TestStation4: "test4",
+    TestStation5: "test5",
+    TestStation6: "test6",
+    TestStation7: "test7",
+    Teo: "racoon"
 };
 
 // logic to check if the password matches or not
