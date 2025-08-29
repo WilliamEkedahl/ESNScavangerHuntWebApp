@@ -52,10 +52,15 @@
                 }
 
             //    const cameraId = devices[0].id;
-
+            // Prefer the second camera if available (usually back camera on phones)
+            let cameraId = devices[0].id;
+            if (devices.length > 1) {
+                cameraId = devices[1].id;
+            }
 
                 html5QrCode.start(
-                    { facingMode: "environment" }, // prefer back camera on mobile
+                    //{ facingMode: "environment" }, // prefer back camera on mobile
+                    { deviceId: { exact: cameraId } },
                     { fps: 10, qrbox: 250 },
                     (decodedText) => {
                         scanStatus.style.color = "green";
