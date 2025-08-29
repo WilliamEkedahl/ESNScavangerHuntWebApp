@@ -1,17 +1,17 @@
 // very confidential stuff please dont snoop around here :P
 const checkpoints = {
     station1: "apple-mango-QF",
-    checkpoint2: "banana-pear-ZX",
-    checkpoint3: "cherry-lemon-KJ",
-    checkpoint4: "grape-peach-MN",
-    checkpoint5: "melon-apple-RT",
-    checkpoint6: "peach-banana-LD",
-    checkpoint7: "orange-mango-WQ",
-    checkpoint8: "lemon-cherry-PV",
-    checkpoint9: "mango-pear-KT",
-    checkpoint10: "apple-grape-HS",
-    checkpoint11: "coral-bike-LS",
-    checkpoint12: "mine-river-TP"
+    station2: "banana-pear-ZX",
+    station3: "cherry-lemon-KJ",
+    station4: "grape-peach-MN",
+    station5: "melon-apple-RT",
+    station6: "peach-banana-LD",
+    station7: "orange-mango-WQ",
+    station8: "lemon-cherry-PV",
+    station9: "mango-pear-KT",
+    station10: "apple-grape-HS",
+    station11: "coral-bike-LS",
+    station12: "mine-river-TP"
 };
 
 // logic to check if the password matches or not
