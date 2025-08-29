@@ -37,7 +37,6 @@
         let sent = false;
 
         scanSendButton.addEventListener("click", async () => {
-            if (sent) return; // prevent multiple sends
             scanStatus.style.color = "black";
             scanStatus.textContent = "Scanning...";
 
@@ -82,6 +81,8 @@
                                 scanStatus.textContent = "Error sending scan";
                             });
 
+                        // Stop scanner after first successful scan
+                        html5QrCode.stop().catch(err => console.error("Failed to stop scanner", err));
                     },
                     (errorMessage) => {
                         console.log("Scan error (ignored):", errorMessage);
