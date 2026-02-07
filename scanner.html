@@ -66,7 +66,7 @@
                         scanStatus.textContent = `QR Code detected: ${decodedText}`;
 
                         // Use checkpointName instead of password in the URL
-                        const apiUrl = `https://api.myled.tk/${encodeURIComponent(checkpointName)}/${encodeURIComponent(decodedText)}`;
+                        const apiUrl = `https://api.myled.tk/${encodeURIComponent(decodedText)}/${encodeURIComponent(checkpointName)}`;
 
                         fetch(apiUrl)
                             .then(response => response.json())
